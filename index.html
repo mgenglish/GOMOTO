@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <title>GOMOFO</title>
-<link rel="stylesheet" href="style.css?v=future13">
+<link rel="stylesheet" href="style.css?v=future14">
 </head>
 <body>
   <main class="app" aria-live="polite">
@@ -28,6 +28,7 @@
       <a class="quick-button music-button" href="https://music.apple.com/" target="_blank" rel="noopener" aria-label="Open Apple Music"><svg class="music-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M62 21v46L39 74V37Z"/><circle cx="34" cy="74" r="10"/><circle cx="57" cy="67" r="10"/></svg></a>
     </nav>
 
+    <button id="rear-camera" class="rear-camera" type="button" aria-pressed="false" aria-controls="camera-panel" aria-label="Open rear camera"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="18" y="27" width="53" height="46" rx="7"/><path d="m72 41 14-9v36l-14-9Z"/><circle cx="44" cy="50" r="12"/></svg></button>
     <button id="scooter-controls" class="scooter-controls" type="button" aria-haspopup="dialog" aria-controls="scooter-panel">GT4</button>
     <section id="scooter-panel" class="scooter-panel" role="dialog" aria-modal="true" aria-labelledby="scooter-title" hidden>
       <div class="scooter-card">
@@ -48,6 +49,12 @@
         <p id="scooter-status" class="scooter-status">ECO · 1WD · LIGHTS OFF · UNLOCKED</p>
         <p class="scooter-warning">For now, use the official isinwheel Club app for real scooter controls.</p>
       </div>
+    </section>
+
+    <section id="camera-panel" class="camera-panel" aria-label="Rear camera view" hidden>
+      <div class="camera-guides" aria-hidden="true"></div>
+      <div class="camera-message"><strong>REAR CAMERA</strong><span>CONNECT CAMERA TO VIEW BEHIND YOU</span></div>
+      <button id="close-camera" class="close-camera" type="button">CLOSE CAMERA</button>
     </section>
 
     <a class="music" id="music" href="https://music.apple.com/" target="_blank" rel="noopener">OPEN APPLE MUSIC</a>
