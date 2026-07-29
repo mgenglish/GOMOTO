@@ -56,31 +56,11 @@ function makeSignalControl(element, direction) {
 makeSignalControl(leftSignal, 'left');
 makeSignalControl(rightSignal, 'right');
 
-const scooterPreview = { mode: 'ECO', drive: '1WD', lights: false, lock: false };
-
-function updateScooterPreview() {
-  scooterStatus.textContent = `${scooterPreview.mode} · ${scooterPreview.drive} · LIGHTS ${scooterPreview.lights ? 'ON' : 'OFF'} · ${scooterPreview.lock ? 'LOCKED' : 'UNLOCKED'}`;
-}
-
 if (scooterControls && scooterPanel) {
   const closeScooterPanel = () => { scooterPanel.hidden = true; scooterControls.classList.remove('is-active'); scooterControls.setAttribute('aria-pressed', 'false'); scooterControls.focus(); };
   scooterControls.addEventListener('click', () => { scooterPanel.hidden = false; scooterControls.classList.add('is-active'); scooterControls.setAttribute('aria-pressed', 'true'); closeScooterControls.focus(); });
   closeScooterControls.addEventListener('click', closeScooterPanel);
   scooterPanel.addEventListener('click', event => { if (event.target === scooterPanel) closeScooterPanel(); });
-  document.querySelectorAll('.scooter-control').forEach(control => control.addEventListener('click', () => {
-    const group = control.dataset.group;
-    const toggle = control.dataset.toggle;
-    if (group) {
-      scooterPreview[group] = control.dataset.value;
-      document.querySelectorAll(`.scooter-control[data-group="${group}"]`).forEach(item => item.classList.toggle('is-selected', item === control));
-    }
-    if (toggle) {
-      scooterPreview[toggle] = !scooterPreview[toggle];
-      control.setAttribute('aria-pressed', String(scooterPreview[toggle]));
-      control.querySelector('span').textContent = scooterPreview[toggle] ? 'ON' : 'OFF';
-    }
-    updateScooterPreview();
-  }));
 }
 
 function setCameraMode(open) {
