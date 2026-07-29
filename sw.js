@@ -1,9 +1,10 @@
-const CACHE_NAME = 'gomofo-v1';
+const CACHE_NAME = 'gomofo-v2';
 const APP_FILES = [
   './',
   './index.html',
   './style.css?v=future16',
-  './app.js?v=future19',
+  './speed-fix.js?v=future20',
+  './app.js?v=future20',
   './manifest.webmanifest'
 ];
 
