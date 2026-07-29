@@ -50,7 +50,7 @@ function locationUpdate(position) {
   speed.textContent = Math.round(mph);
   if (lastPosition && point.accuracy < 50) tripMiles += kilometresBetween(lastPosition, point) * .621371;
   lastPosition = point;
-  odometer.textContent = `TRIP ${tripMiles.toFixed(1)} MI`;
+  odometer.textContent = `${tripMiles.toFixed(1)} MI`;
   if (!weatherLoaded) loadWeather(point.latitude, point.longitude);
   updateMap(point.latitude, point.longitude);
   advanceRouteIfNeeded();
