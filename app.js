@@ -2,7 +2,7 @@ Exit code: 0
 Wall time: 0.5 seconds
 Output:
 // Paste your restricted public Mapbox token between the quotes below.
-const MAPBOX_TOKEN = 'PASTE_YOUR_MAPBOX_TOKEN_HERE';
+const MAPBOX_TOKEN = '';
 
 const speed = document.querySelector('#speed');
 const clock = document.querySelector('#clock');
