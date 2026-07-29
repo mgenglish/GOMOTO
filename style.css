@@ -63,3 +63,14 @@ button, .destination-form button { border-radius: 3px; }
 .speed small { display: block; margin-top: 20px; font-size: clamp(11px, 1.8vw, 18px); letter-spacing: .28em; }
 #odometer { left: 38px; bottom: 30px; color: var(--ice); letter-spacing: .16em; font-size: clamp(14px, 2vw, 22px); }
 .signal { font-size: clamp(52px, 10vw, 110px); opacity: 1; }
+
+/* First-render foundation: one focused, futuristic speed screen. */
+.app { min-height: 100dvh; padding: max(26px, env(safe-area-inset-top)) 7vw max(26px, env(safe-area-inset-bottom)); grid-template-rows: auto 1fr; gap: 28px; }
+header, .music, .destination-form, .turn-banner, .map-panel, #ride-button, #settings { display: none; }
+body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
+.brand { font-size: clamp(24px, 4vw, 42px); letter-spacing: .34em; padding-left: .34em; }
+.dashboard { width: 100%; min-height: min(68vh, 640px); grid-template-columns: 1fr 2.4fr 1fr; border: 2px solid #70efff; background: linear-gradient(180deg, rgba(1,4,8,.94), rgba(4,10,17,.92)); box-shadow: 0 0 34px rgba(80,240,255,.38), inset 0 0 75px rgba(0,0,0,.95); clip-path: polygon(0 0, calc(100% - 58px) 0, 100% 58px, 100% calc(100% - 58px), calc(100% - 58px) 100%, 0 100%, 0 58px); }
+#speed { font-size: clamp(190px, 36vw, 470px); color: #fff; text-shadow: 0 0 10px rgba(255,255,255,.35), 0 0 32px rgba(77,226,255,.28); }
+#odometer { left: clamp(28px, 5vw, 68px); bottom: clamp(26px, 5vw, 58px); color: #70efff; font-size: clamp(17px, 2.2vw, 26px); letter-spacing: .2em; }
+.signal { color: #b9fbff; font-size: clamp(56px, 9vw, 112px); text-shadow: 0 0 26px rgba(112,239,255,.85); }
+@media (orientation: portrait) { .app { padding-left: 18px; padding-right: 18px; } .dashboard { min-height: 64vh; } }
