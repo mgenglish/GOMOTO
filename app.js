@@ -58,7 +58,11 @@ makeSignalControl(rightSignal, 'right');
 
 if (scooterControls && scooterPanel) {
   const closeScooterPanel = () => { scooterPanel.hidden = true; scooterControls.classList.remove('is-active'); scooterControls.setAttribute('aria-pressed', 'false'); scooterControls.focus(); };
-  scooterControls.addEventListener('click', () => { scooterPanel.hidden = false; scooterControls.classList.add('is-active'); scooterControls.setAttribute('aria-pressed', 'true'); closeScooterControls.focus(); });
+  scooterControls.addEventListener('click', () => {
+    scooterControls.classList.add('is-active');
+    scooterControls.setAttribute('aria-pressed', 'true');
+    window.location.href = 'shortcuts://run-shortcut?name=Open%20isinwheel%20Club';
+  });
   closeScooterControls.addEventListener('click', closeScooterPanel);
   scooterPanel.addEventListener('click', event => { if (event.target === scooterPanel) closeScooterPanel(); });
 }
