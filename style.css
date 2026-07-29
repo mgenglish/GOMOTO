@@ -80,7 +80,8 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 #odometer { position: fixed; z-index: 11; left: 50%; bottom: max(36px, env(safe-area-inset-bottom)); transform: translateX(-50%); margin: 0; color: #70efff; font-size: clamp(17px, 2.2vw, 26px); letter-spacing: .2em; white-space: nowrap; }
 .signal { color: #b9fbff; font-size: clamp(56px, 9vw, 112px); text-shadow: 0 0 26px rgba(112,239,255,.85); }
 .quick-actions { position: fixed; z-index: 10; inset: 0; pointer-events: none; }
-.quick-button { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: clamp(78px, 10vw, 104px); height: clamp(78px, 10vw, 104px); border: 2px solid var(--ice); border-radius: 50%; outline: 18px solid #02070d; background: rgba(4,14,23,.94); color: var(--ice); text-decoration: none; font-size: clamp(42px, 5vw, 58px); line-height: 1; box-shadow: 0 0 26px rgba(112,239,255,.42), inset 0 0 18px rgba(112,239,255,.16); pointer-events: auto; }
+.quick-button { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: clamp(78px, 10vw, 104px); height: clamp(78px, 10vw, 104px); border: 2px solid var(--ice); border-radius: 50%; background: rgba(4,14,23,.94); color: var(--ice); text-decoration: none; font-size: clamp(42px, 5vw, 58px); line-height: 1; box-shadow: 0 0 26px rgba(112,239,255,.42), inset 0 0 18px rgba(112,239,255,.16); pointer-events: auto; isolation: isolate; }
+.quick-button::before { content: ""; position: absolute; inset: -28px; z-index: -1; border-radius: 50%; background: #02070d; }
 .compass-button { left: max(24px, env(safe-area-inset-left)); position: fixed; font-size: 0; }
 .compass-icon { width: 58%; height: 58%; overflow: visible; }
 .compass-icon circle { fill: none; stroke: currentColor; stroke-width: 4; }
