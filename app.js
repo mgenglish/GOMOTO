@@ -21,6 +21,7 @@ const scooterStatus = document.querySelector('#scooter-status');
 const rearCamera = document.querySelector('#rear-camera');
 const cameraPanel = document.querySelector('#camera-panel');
 const closeCamera = document.querySelector('#close-camera');
+const quickButtons = document.querySelectorAll('.quick-button');
 
 let riding = false;
 let tripMiles = 0;
@@ -62,9 +63,10 @@ function updateScooterPreview() {
 }
 
 if (scooterControls && scooterPanel) {
-  scooterControls.addEventListener('click', () => { scooterPanel.hidden = false; closeScooterControls.focus(); });
-  closeScooterControls.addEventListener('click', () => { scooterPanel.hidden = true; scooterControls.focus(); });
-  scooterPanel.addEventListener('click', event => { if (event.target === scooterPanel) { scooterPanel.hidden = true; scooterControls.focus(); } });
+  const closeScooterPanel = () => { scooterPanel.hidden = true; scooterControls.classList.remove('is-active'); scooterControls.setAttribute('aria-pressed', 'false'); scooterControls.focus(); };
+  scooterControls.addEventListener('click', () => { scooterPanel.hidden = false; scooterControls.classList.add('is-active'); scooterControls.setAttribute('aria-pressed', 'true'); closeScooterControls.focus(); });
+  closeScooterControls.addEventListener('click', closeScooterPanel);
+  scooterPanel.addEventListener('click', event => { if (event.target === scooterPanel) closeScooterPanel(); });
   document.querySelectorAll('.scooter-control').forEach(control => control.addEventListener('click', () => {
     const group = control.dataset.group;
     const toggle = control.dataset.toggle;
@@ -84,6 +86,7 @@ if (scooterControls && scooterPanel) {
 function setCameraMode(open) {
   document.body.classList.toggle('camera-mode', open);
   cameraPanel.hidden = !open;
+  rearCamera.classList.toggle('is-active', open);
   rearCamera.setAttribute('aria-pressed', String(open));
 }
 
@@ -91,6 +94,13 @@ if (rearCamera && cameraPanel && closeCamera) {
   rearCamera.addEventListener('click', () => setCameraMode(!document.body.classList.contains('camera-mode')));
   closeCamera.addEventListener('click', () => setCameraMode(false));
 }
+
+quickButtons.forEach(button => button.addEventListener('click', event => {
+  const turningOn = !button.classList.contains('is-active');
+  button.classList.toggle('is-active', turningOn);
+  button.setAttribute('aria-pressed', String(turningOn));
+  if (!turningOn) event.preventDefault();
+}));
 
 function updateClock() {
   clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
