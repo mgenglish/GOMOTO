@@ -1,0 +1,19 @@
+:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Arial Rounded MT Bold", sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #000; color: #fff; }
+.app { min-height: 100dvh; padding: max(18px, env(safe-area-inset-top)) 22px max(18px, env(safe-area-inset-bottom)); display: grid; grid-template-rows: auto 1fr auto auto auto; gap: 12px; }
+header { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: clamp(16px, 3vw, 24px); font-weight: 700; }
+#clock { text-align: center; }
+.corner:last-child { text-align: right; }
+.battery { white-space: nowrap; }
+.dashboard { display: grid; grid-template-columns: 1fr 3fr 1fr; align-items: center; min-height: 230px; }
+.speed { text-align: center; }
+#speed { display: block; font-size: clamp(128px, 30vw, 300px); font-weight: 800; letter-spacing: -0.09em; line-height: .8; }
+.speed small { font-size: clamp(18px, 4vw, 32px); font-weight: 800; }
+.speed p { font-size: clamp(15px, 3vw, 24px); margin: 12px 0 0; }
+.signal { font-size: clamp(40px, 11vw, 90px); opacity: .18; text-align: center; }
+.music, .navigation { border: 2px solid #fff; border-radius: 14px; padding: 14px; text-align: center; font-size: clamp(14px, 3vw, 22px); font-weight: 700; }
+.navigation { min-height: 58px; }
+button { border: 2px solid #fff; background: #fff; color: #000; border-radius: 14px; min-height: 60px; font: inherit; font-size: 22px; font-weight: 900; }
+#settings { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); background: #000; color: #fff; border-radius: 50%; min-height: 48px; width: 48px; font-size: 24px; }
+@media (orientation: portrait) { .dashboard { min-height: 42vh; } #speed { font-size: clamp(120px, 38vw, 250px); } }
