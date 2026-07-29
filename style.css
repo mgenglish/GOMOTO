@@ -77,9 +77,11 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 .brand::after { left: calc(50% + 185px); clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%, 0 50%); }
 .dashboard { order: 3; width: min(100%, 980px); justify-self: center; min-height: min(62vh, 570px); grid-template-columns: 1fr 2.4fr 1fr; border: 2px solid #b4fbff; background: linear-gradient(180deg, rgba(1,4,8,.96), rgba(4,10,17,.94)); box-shadow: 0 0 34px rgba(80,240,255,.38), inset 0 0 75px rgba(0,0,0,.95); clip-path: polygon(0 0, calc(100% - 58px) 0, 100% 58px, 100% calc(100% - 58px), calc(100% - 58px) 100%, 0 100%, 0 58px); }
 #speed { font-size: clamp(190px, 31vw, 420px); color: #fff; text-shadow: 0 0 10px rgba(255,255,255,.35), 0 0 32px rgba(77,226,255,.28); }
-#odometer { left: clamp(28px, 5vw, 68px); bottom: clamp(26px, 5vw, 58px); color: #70efff; font-size: clamp(17px, 2.2vw, 26px); letter-spacing: .2em; }
+#odometer { position: fixed; z-index: 11; left: 50%; bottom: max(36px, env(safe-area-inset-bottom)); transform: translateX(-50%); margin: 0; color: #70efff; font-size: clamp(17px, 2.2vw, 26px); letter-spacing: .2em; white-space: nowrap; }
 .signal { color: #b9fbff; font-size: clamp(56px, 9vw, 112px); text-shadow: 0 0 26px rgba(112,239,255,.85); }
-.quick-actions { position: fixed; z-index: 10; left: 50%; bottom: max(24px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; justify-content: center; gap: 28px; }
-.quick-button { display: grid; place-items: center; width: clamp(78px, 10vw, 104px); height: clamp(78px, 10vw, 104px); border: 2px solid var(--ice); border-radius: 50%; background: rgba(4,14,23,.94); color: var(--ice); text-decoration: none; font-size: clamp(42px, 5vw, 58px); line-height: 1; box-shadow: 0 0 26px rgba(112,239,255,.42), inset 0 0 18px rgba(112,239,255,.16); }
+.quick-actions { position: fixed; z-index: 10; inset: 0; pointer-events: none; }
+.quick-button { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: clamp(78px, 10vw, 104px); height: clamp(78px, 10vw, 104px); border: 2px solid var(--ice); border-radius: 50%; background: rgba(4,14,23,.94); color: var(--ice); text-decoration: none; font-size: clamp(42px, 5vw, 58px); line-height: 1; box-shadow: 0 0 26px rgba(112,239,255,.42), inset 0 0 18px rgba(112,239,255,.16); pointer-events: auto; }
+.compass-button { left: max(24px, env(safe-area-inset-left)); font-size: clamp(38px, 4.6vw, 54px); }
+.music-button { right: max(24px, env(safe-area-inset-right)); }
 .quick-button:active { background: var(--ice); color: #02101a; }
 @media (orientation: portrait) { .app { padding-left: 18px; padding-right: 18px; } .brand::before, .brand::after { width: 17%; } .brand::before { right: calc(50% + 102px); } .brand::after { left: calc(50% + 102px); } .dashboard { min-height: 64vh; } }
