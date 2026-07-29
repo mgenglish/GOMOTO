@@ -12,6 +12,12 @@ const destination = document.querySelector('#destination');
 const turnArrow = document.querySelector('#turn-arrow');
 const turnTitle = document.querySelector('#turn-title');
 const turnDetail = document.querySelector('#turn-detail');
+const leftSignal = document.querySelector('#left-signal');
+const rightSignal = document.querySelector('#right-signal');
+const scooterControls = document.querySelector('#scooter-controls');
+const scooterPanel = document.querySelector('#scooter-panel');
+const closeScooterControls = document.querySelector('#close-scooter-controls');
+const scooterStatus = document.querySelector('#scooter-status');
 
 let riding = false;
 let tripMiles = 0;
@@ -21,6 +27,56 @@ let lastMapPoint;
 let currentPoint;
 let routeSteps = [];
 let activeStep = 0;
+let activeSignal = null;
+
+function setSignal(direction) {
+  activeSignal = activeSignal === direction ? null : direction;
+  const leftOn = activeSignal === 'left';
+  const rightOn = activeSignal === 'right';
+  leftSignal.classList.toggle('signal-on', leftOn);
+  rightSignal.classList.toggle('signal-on', rightOn);
+  leftSignal.setAttribute('aria-pressed', String(leftOn));
+  rightSignal.setAttribute('aria-pressed', String(rightOn));
+}
+
+function makeSignalControl(element, direction) {
+  element.addEventListener('click', () => setSignal(direction));
+  element.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setSignal(direction);
+    }
+  });
+}
+
+makeSignalControl(leftSignal, 'left');
+makeSignalControl(rightSignal, 'right');
+
+const scooterPreview = { mode: 'ECO', drive: '1WD', lights: false, lock: false };
+
+function updateScooterPreview() {
+  scooterStatus.textContent = `${scooterPreview.mode} · ${scooterPreview.drive} · LIGHTS ${scooterPreview.lights ? 'ON' : 'OFF'} · ${scooterPreview.lock ? 'LOCKED' : 'UNLOCKED'}`;
+}
+
+if (scooterControls && scooterPanel) {
+  scooterControls.addEventListener('click', () => { scooterPanel.hidden = false; closeScooterControls.focus(); });
+  closeScooterControls.addEventListener('click', () => { scooterPanel.hidden = true; scooterControls.focus(); });
+  scooterPanel.addEventListener('click', event => { if (event.target === scooterPanel) { scooterPanel.hidden = true; scooterControls.focus(); } });
+  document.querySelectorAll('.scooter-control').forEach(control => control.addEventListener('click', () => {
+    const group = control.dataset.group;
+    const toggle = control.dataset.toggle;
+    if (group) {
+      scooterPreview[group] = control.dataset.value;
+      document.querySelectorAll(`.scooter-control[data-group="${group}"]`).forEach(item => item.classList.toggle('is-selected', item === control));
+    }
+    if (toggle) {
+      scooterPreview[toggle] = !scooterPreview[toggle];
+      control.setAttribute('aria-pressed', String(scooterPreview[toggle]));
+      control.querySelector('span').textContent = scooterPreview[toggle] ? 'ON' : 'OFF';
+    }
+    updateScooterPreview();
+  }));
+}
 
 function updateClock() {
   clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
