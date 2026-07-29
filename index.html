@@ -19,67 +19,27 @@
       <div id="clock">--:--</div>
       <div id="battery" class="corner battery">▱ --%</div>
     </header>
-
     <section class="dashboard">
       <div id="left-signal" class="signal" role="button" tabindex="0" aria-label="Turn left signal" aria-pressed="false">◀</div>
       <div class="speed"><span id="speed">0</span></div>
       <div id="right-signal" class="signal" role="button" tabindex="0" aria-label="Turn right signal" aria-pressed="false">▶</div>
       <p id="odometer">0.0 MI</p>
     </section>
-
     <nav class="quick-actions" aria-label="Quick actions">
       <a class="quick-button compass-button" href="https://maps.apple.com/" target="_blank" rel="noopener" aria-label="Open navigation" aria-pressed="false"><svg class="compass-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><path class="needle-north" d="M65 29 54 54 29 65 46 46Z"/><path class="needle-south" d="M35 71 46 46 71 35 54 54Z"/></svg></a>
       <a class="quick-button music-button" href="https://music.apple.com/" target="_blank" rel="noopener" aria-label="Open Apple Music" aria-pressed="false"><svg class="music-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M62 21v46L39 74V37Z"/><circle cx="34" cy="74" r="10"/><circle cx="57" cy="67" r="10"/></svg></a>
     </nav>
-
     <button id="rear-camera" class="rear-camera" type="button" aria-pressed="false" aria-controls="camera-panel" aria-label="Open rear camera"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="18" y="27" width="53" height="46" rx="7"/><path d="m72 41 14-9v36l-14-9Z"/><circle cx="44" cy="50" r="12"/></svg></button>
     <button id="scooter-controls" class="scooter-controls" type="button" aria-haspopup="dialog" aria-controls="scooter-panel">GT4</button>
-    <section id="scooter-panel" class="scooter-panel" role="dialog" aria-modal="true" aria-labelledby="scooter-title" hidden>
-      <div class="scooter-card">
-        <div class="scooter-card-header">
-          <div><span class="eyebrow">SCOOTER STATUS · PREVIEW</span><h2 id="scooter-title">GT4 DUAL <span class="connected-dot" aria-label="Connected"></span></h2></div>
-          <button id="close-scooter-controls" class="close-controls" type="button" aria-label="Close scooter controls">×</button>
-        </div>
-        <p class="preview-note">CONNECTED IN ISINWHEEL CLUB · GOMOFO CANNOT CONTROL IT YET</p>
-        <div class="scooter-hero">
-          <div class="scooter-outline" aria-hidden="true"><span></span></div>
-          <div class="scooter-battery"><span>▱</span><strong>82%</strong><small>ELECTRICITY</small><b>BLUETOOTH ON</b></div>
-        </div>
-        <div class="gt4-status-grid">
-          <div><span>SPEED</span><strong>0 <small>MPH</small></strong></div>
-          <div><span>GEAR</span><strong>WALKING<br>MODE</strong></div>
-          <div><span>LIGHT</span><strong>OFF</strong></div>
-        </div>
-        <div class="gt4-links"><button type="button" disabled>⌁ SETTINGS</button><button type="button" disabled>☷ DETAILS</button></div>
-        <p id="scooter-status" class="scooter-status">UNLOCKED · BLUETOOTH CONNECTED · LIGHT OFF</p>
-        <p class="scooter-warning">For now, use the official isinwheel Club app for real scooter controls.</p>
-      </div>
-    </section>
-
-    <section id="camera-panel" class="camera-panel" aria-label="Rear camera view" hidden>
-      <div class="camera-guides" aria-hidden="true"></div>
-      <div class="camera-message"><strong>REAR CAMERA</strong><span>CONNECT CAMERA TO VIEW BEHIND YOU</span></div>
-      <button id="close-camera" class="close-camera" type="button">CLOSE CAMERA</button>
-    </section>
-
+    <section id="scooter-panel" class="scooter-panel" role="dialog" aria-modal="true" aria-labelledby="scooter-title" hidden><div class="scooter-card"><div class="scooter-card-header"><div><span class="eyebrow">SCOOTER STATUS · PREVIEW</span><h2 id="scooter-title">GT4 DUAL <span class="connected-dot" aria-label="Connected"></span></h2></div><button id="close-scooter-controls" class="close-controls" type="button" aria-label="Close scooter controls">×</button></div><p class="preview-note">CONNECTED IN ISINWHEEL CLUB · GOMOFO CANNOT CONTROL IT YET</p><div class="scooter-hero"><div class="scooter-outline" aria-hidden="true"><span></span></div><div class="scooter-battery"><span>▱</span><strong>82%</strong><small>ELECTRICITY</small><b>BLUETOOTH ON</b></div></div><div class="gt4-status-grid"><div><span>SPEED</span><strong>0 <small>MPH</small></strong></div><div><span>GEAR</span><strong>WALKING<br>MODE</strong></div><div><span>LIGHT</span><strong>OFF</strong></div></div><div class="gt4-links"><button type="button" disabled>⌁ SETTINGS</button><button type="button" disabled>☷ DETAILS</button></div><p id="scooter-status" class="scooter-status">UNLOCKED · BLUETOOTH CONNECTED · LIGHT OFF</p><p class="scooter-warning">For now, use the official isinwheel Club app for real scooter controls.</p></div></section>
+    <section id="camera-panel" class="camera-panel" aria-label="Rear camera view" hidden><div class="camera-guides" aria-hidden="true"></div><div class="camera-message"><strong>REAR CAMERA</strong><span>CONNECT CAMERA TO VIEW BEHIND YOU</span></div><button id="close-camera" class="close-camera" type="button">CLOSE CAMERA</button></section>
     <a class="music" id="music" href="https://music.apple.com/" target="_blank" rel="noopener">OPEN APPLE MUSIC</a>
-    <form class="destination-form" id="destination-form">
-      <label class="sr-only" for="destination">Where do you want to go?</label>
-      <input id="destination" type="text" autocomplete="off" placeholder="SAY OR TYPE WHERE TO" enterkeyhint="go">
-      <button type="submit">GO</button>
-    </form>
-    <section class="turn-banner" aria-label="Navigation instruction">
-      <span id="turn-arrow" class="turn-arrow" aria-hidden="true">↑</span>
-      <div><strong id="turn-title">MAP FOLLOWS YOU</strong><small id="turn-detail">TURN DIRECTIONS COME NEXT</small></div>
-    </section>
-    <section class="map-panel" aria-label="Map">
-      <div class="map-heading"><span>MAP</span><span id="map-status">START RIDE TO LOCATE</span></div>
-      <iframe id="map" title="Your location map" loading="lazy"></iframe>
-    </section>
-
-    <button id="ride-button">START RIDE</button>
-    <button id="settings" aria-label="Settings">⚙</button>
+    <form class="destination-form" id="destination-form"><label class="sr-only" for="destination">Where do you want to go?</label><input id="destination" type="text" autocomplete="off" placeholder="SAY OR TYPE WHERE TO" enterkeyhint="go"><button type="submit">GO</button></form>
+    <section class="turn-banner" aria-label="Navigation instruction"><span id="turn-arrow" class="turn-arrow" aria-hidden="true">↑</span><div><strong id="turn-title">MAP FOLLOWS YOU</strong><small id="turn-detail">TURN DIRECTIONS COME NEXT</small></div></section>
+    <section class="map-panel" aria-label="Map"><div class="map-heading"><span>MAP</span><span id="map-status">START RIDE TO LOCATE</span></div><iframe id="map" title="Your location map" loading="lazy"></iframe></section>
+    <button id="ride-button">START RIDE</button><button id="settings" aria-label="Settings">⚙</button>
   </main>
-  <script src="app.js?v=future19"></script>
+<script src="speed-fix.js?v=future20"></script>
+<script src="app.js?v=future20"></script>
 </body>
 </html>
