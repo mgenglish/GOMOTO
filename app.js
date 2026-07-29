@@ -18,6 +18,9 @@ const scooterControls = document.querySelector('#scooter-controls');
 const scooterPanel = document.querySelector('#scooter-panel');
 const closeScooterControls = document.querySelector('#close-scooter-controls');
 const scooterStatus = document.querySelector('#scooter-status');
+const rearCamera = document.querySelector('#rear-camera');
+const cameraPanel = document.querySelector('#camera-panel');
+const closeCamera = document.querySelector('#close-camera');
 
 let riding = false;
 let tripMiles = 0;
@@ -76,6 +79,17 @@ if (scooterControls && scooterPanel) {
     }
     updateScooterPreview();
   }));
+}
+
+function setCameraMode(open) {
+  document.body.classList.toggle('camera-mode', open);
+  cameraPanel.hidden = !open;
+  rearCamera.setAttribute('aria-pressed', String(open));
+}
+
+if (rearCamera && cameraPanel && closeCamera) {
+  rearCamera.addEventListener('click', () => setCameraMode(!document.body.classList.contains('camera-mode')));
+  closeCamera.addEventListener('click', () => setCameraMode(false));
 }
 
 function updateClock() {
