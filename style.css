@@ -87,7 +87,9 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 .compass-icon path { stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
 .needle-north { fill: currentColor; }
 .needle-south { fill: rgba(112,239,255,.16); }
-.music-button { right: max(24px, env(safe-area-inset-right)); font-size: 0; }
+.compass-mark { display: grid; place-items: center; width: 58%; height: 58%; }
+.compass-mark::after { content: "◆"; color: currentColor; font-size: clamp(28px, 4vw, 44px); transform: rotate(38deg); text-shadow: 0 0 12px currentColor; }
+.music-button { right: max(24px, env(safe-area-inset-right)); font-size: clamp(42px, 5vw, 58px); }
 .music-icon { width: 58%; height: 58%; overflow: visible; }
 .music-icon path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
 .music-icon circle { fill: currentColor; }
