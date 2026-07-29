@@ -115,6 +115,25 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 .scooter-controls { position: fixed; z-index: 12; top: max(88px, calc(env(safe-area-inset-top) + 64px)); right: max(34px, env(safe-area-inset-right)); display: grid; place-items: center; width: 70px; min-height: 70px; padding: 0; border: 4px solid #b9fbff; border-radius: 50%; background: radial-gradient(circle at 34% 26%, rgba(115,238,255,.34), rgba(7,24,37,.98) 50%, rgba(0,4,10,.99)); color: #e8feff; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-shadow: 0 0 8px rgba(185,251,255,.85); box-shadow: 0 0 24px rgba(112,239,255,.72), inset 0 2px 4px rgba(231,255,255,.78), inset 0 -10px 18px rgba(0,0,0,.76); isolation: isolate; }
 .scooter-controls::before { content: ""; position: absolute; z-index: -1; inset: -18px; border-radius: 50%; background: #02070d; box-shadow: 0 0 22px rgba(0,4,10,.94); }
 .scooter-controls::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(222,254,255,.76); border-radius: 50%; pointer-events: none; }
+.rear-camera { position: fixed; z-index: 12; top: max(88px, calc(env(safe-area-inset-top) + 64px)); left: max(34px, env(safe-area-inset-left)); display: grid; place-items: center; width: 70px; min-height: 70px; padding: 0; border: 4px solid #b9fbff; border-radius: 50%; background: radial-gradient(circle at 34% 26%, rgba(115,238,255,.34), rgba(7,24,37,.98) 50%, rgba(0,4,10,.99)); color: #e8feff; box-shadow: 0 0 24px rgba(112,239,255,.72), inset 0 2px 4px rgba(231,255,255,.78), inset 0 -10px 18px rgba(0,0,0,.76); isolation: isolate; }
+.rear-camera::before { content: ""; position: absolute; z-index: -1; inset: -18px; border-radius: 50%; background: #02070d; box-shadow: 0 0 22px rgba(0,4,10,.94); }
+.rear-camera::after { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(222,254,255,.76); border-radius: 50%; pointer-events: none; }
+.rear-camera svg { width: 54%; height: 54%; fill: none; stroke: currentColor; stroke-width: 7; stroke-linejoin: round; }
+.rear-camera:active, .rear-camera[aria-pressed="true"] { color: #041724; background: #b9fbff; }
+.camera-panel { display: none; }
+body.camera-mode { overflow: hidden; }
+body.camera-mode .app { gap: 8px; padding-bottom: 0; }
+body.camera-mode .dashboard { min-height: 34dvh; height: 34dvh; }
+body.camera-mode #speed { font-size: clamp(132px, 25vw, 300px); }
+body.camera-mode .camera-panel { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; place-items: center; height: 45dvh; overflow: hidden; border-top: 3px solid #b9fbff; background: radial-gradient(ellipse at 50% 0, rgba(27,76,102,.48), transparent 55%), linear-gradient(145deg, #07121e, #010408); box-shadow: 0 -10px 30px rgba(0,0,0,.62), inset 0 1px rgba(231,255,255,.22); }
+.camera-guides { position: absolute; inset: 0; opacity: .52; background: linear-gradient(90deg, transparent 49.7%, rgba(185,251,255,.55) 50%, transparent 50.3%), linear-gradient(90deg, transparent 15%, rgba(185,251,255,.28) 15.2%, transparent 15.4%, transparent 84.6%, rgba(185,251,255,.28) 84.8%, transparent 85%); }
+.camera-guides::before, .camera-guides::after { content: ""; position: absolute; left: 15%; right: 15%; height: 1px; background: rgba(185,251,255,.4); }
+.camera-guides::before { top: 42%; } .camera-guides::after { top: 70%; }
+.camera-message { position: relative; z-index: 1; display: grid; gap: 8px; text-align: center; color: var(--ice); letter-spacing: .14em; text-shadow: 0 0 14px rgba(112,239,255,.55); }
+.camera-message strong { color: #fff; font-size: clamp(20px, 4vw, 32px); font-weight: 600; }
+.camera-message span { font-size: clamp(10px, 2vw, 15px); }
+.close-camera { position: absolute; z-index: 2; right: max(18px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); min-height: 34px; padding: 0 12px; border: 1px solid rgba(185,251,255,.76); border-radius: 999px; background: rgba(1,7,13,.84); color: var(--ice); font-size: 10px; letter-spacing: .11em; }
+@media (orientation: portrait) { body.camera-mode .dashboard { min-height: 38dvh; height: 38dvh; } body.camera-mode .camera-panel { height: 42dvh; } }
 .scooter-panel { position: fixed; z-index: 30; inset: 0; display: grid; place-items: center; padding: 22px; background: rgba(0,4,10,.78); backdrop-filter: blur(10px); }
 .scooter-panel[hidden] { display: none; }
 .scooter-card { width: min(100%, 560px); border: 2px solid #9df6ff; border-radius: 10px; padding: 22px; background: radial-gradient(circle at 50% 0, rgba(31,87,117,.45), transparent 45%), linear-gradient(145deg, #0d2032, #02070e); box-shadow: 0 0 38px rgba(112,239,255,.36), inset 0 1px rgba(255,255,255,.25), inset 0 0 48px rgba(0,0,0,.75); }
