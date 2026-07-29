@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.8 seconds
-Output:
 let mapboxToken = localStorage.getItem('gomofo-mapbox-token') || '';
 
 const speed = document.querySelector('#speed');
@@ -32,7 +29,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 if (navigator.getBattery) navigator.getBattery().then(b => {
-  const update = () => battery.textContent = `â–± ${Math.round(b.level * 100)}%`;
+  const update = () => battery.textContent = `▱ ${Math.round(b.level * 100)}%`;
   update();
   b.addEventListener('levelchange', update);
 });
@@ -70,12 +67,12 @@ function updateMap(latitude, longitude) {
 }
 
 function weatherIcon(code) {
-  if (code === 0) return 'â˜€';
-  if (code <= 3) return 'â˜';
-  if (code <= 48) return 'â˜·';
-  if (code <= 67) return 'â˜‚';
-  if (code <= 77) return 'â„';
-  return 'ÏŸ';
+  if (code === 0) return '☀';
+  if (code <= 3) return '☁';
+  if (code <= 48) return '☷';
+  if (code <= 67) return '☂';
+  if (code <= 77) return '❄';
+  return 'ϟ';
 }
 
 async function loadWeather(latitude, longitude) {
@@ -85,7 +82,7 @@ async function loadWeather(latitude, longitude) {
     const response = await fetch(url);
     const data = await response.json();
     const now = data.current;
-    document.querySelector('#weather').textContent = `${weatherIcon(now.weather_code)} ${Math.round(now.temperature_2m)}Â°`;
+    document.querySelector('#weather').textContent = `${weatherIcon(now.weather_code)} ${Math.round(now.temperature_2m)}°`;
   } catch {
     weatherLoaded = false;
     document.querySelector('#weather').textContent = 'WEATHER --';
@@ -94,10 +91,10 @@ async function loadWeather(latitude, longitude) {
 
 function turnArrowFor(step) {
   const modifier = step.maneuver.modifier || '';
-  if (modifier.includes('left')) return 'â†°';
-  if (modifier.includes('right')) return 'â†±';
-  if (modifier === 'uturn') return 'â†©';
-  return 'â†‘';
+  if (modifier.includes('left')) return '↰';
+  if (modifier.includes('right')) return '↱';
+  if (modifier === 'uturn') return '↩';
+  return '↑';
 }
 
 function distanceLabel(meters) {
@@ -109,14 +106,14 @@ function distanceLabel(meters) {
 function showActiveStep() {
   const step = routeSteps[activeStep];
   if (!step) {
-    turnArrow.textContent = 'âœ“';
+    turnArrow.textContent = '✓';
     turnTitle.textContent = 'YOU ARRIVED';
     turnDetail.textContent = 'DESTINATION REACHED';
     return;
   }
   turnArrow.textContent = turnArrowFor(step);
   turnTitle.textContent = (step.maneuver.instruction || 'KEEP GOING').toUpperCase();
-  turnDetail.textContent = `${distanceLabel(step.distance)} â€¢ ${activeStep + 1} OF ${routeSteps.length}`;
+  turnDetail.textContent = `${distanceLabel(step.distance)} • ${activeStep + 1} OF ${routeSteps.length}`;
 }
 
 function advanceRouteIfNeeded() {
@@ -189,5 +186,3 @@ if (destinationForm) destinationForm.addEventListener('submit', event => {
   destination.blur();
   getDirections(place);
 });
-
-
