@@ -12,8 +12,16 @@ header { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center;
 .speed small { font-size: clamp(18px, 4vw, 32px); font-weight: 800; }
 .speed p { font-size: clamp(15px, 3vw, 24px); margin: 12px 0 0; }
 .signal { font-size: clamp(40px, 11vw, 90px); opacity: .18; text-align: center; }
-.music, .navigation { border: 2px solid #fff; border-radius: 14px; padding: 14px; text-align: center; font-size: clamp(14px, 3vw, 22px); font-weight: 700; }
-.navigation { min-height: 58px; }
+.music { border: 2px solid #fff; border-radius: 14px; padding: 14px; text-align: center; font-size: clamp(14px, 3vw, 22px); font-weight: 700; }
+.turn-banner { display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 92px; border: 2px solid #fff; border-radius: 14px; padding: 10px 16px; }
+.turn-arrow { font-size: clamp(54px, 11vw, 90px); line-height: .8; }
+.turn-banner strong, .turn-banner small { display: block; }
+.turn-banner strong { font-size: clamp(18px, 4vw, 30px); }
+.turn-banner small { margin-top: 4px; font-size: clamp(11px, 2.4vw, 16px); opacity: .7; }
+.map-panel { overflow: hidden; border: 2px solid #fff; border-radius: 14px; background: #fff; }
+.map-heading { display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; background: #000; color: #fff; font-size: clamp(12px, 2.5vw, 18px); font-weight: 800; }
+#map-status { opacity: .75; text-align: right; }
+#map { display: block; width: 100%; height: clamp(92px, 14vh, 145px); border: 0; }
 button { border: 2px solid #fff; background: #fff; color: #000; border-radius: 14px; min-height: 60px; font: inherit; font-size: 22px; font-weight: 900; }
 #settings { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); background: #000; color: #fff; border-radius: 50%; min-height: 48px; width: 48px; font-size: 24px; }
 @media (orientation: portrait) { .dashboard { min-height: 42vh; } #speed { font-size: clamp(120px, 38vw, 250px); } }
