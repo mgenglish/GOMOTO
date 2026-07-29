@@ -3,11 +3,13 @@ const clock = document.querySelector('#clock');
 const battery = document.querySelector('#battery');
 const rideButton = document.querySelector('#ride-button');
 const odometer = document.querySelector('#odometer');
-const navigation = document.querySelector('#navigation');
+const map = document.querySelector('#map');
+const mapStatus = document.querySelector('#map-status');
 let riding = false;
 let tripMiles = 0;
 let lastPosition;
 let weatherLoaded = false;
+let lastMapPoint;
 
 function updateClock() {
   clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -37,6 +39,17 @@ function locationUpdate(position) {
   lastPosition = point;
   odometer.textContent = `TRIP ${tripMiles.toFixed(1)} MI`;
   if (!weatherLoaded) loadWeather(point.latitude, point.longitude);
+  updateMap(point.latitude, point.longitude);
+}
+
+function updateMap(latitude, longitude) {
+  const movedEnough = !lastMapPoint || kilometresBetween(lastMapPoint, { latitude, longitude }) > 0.08;
+  if (!movedEnough) return;
+  lastMapPoint = { latitude, longitude };
+  const edge = 0.008;
+  const bbox = [longitude - edge, latitude - edge, longitude + edge, latitude + edge].join(',');
+  map.src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${latitude}%2C${longitude}`;
+  mapStatus.textContent = 'YOUR LOCATION';
 }
 
 function weatherIcon(code) {
@@ -67,8 +80,4 @@ rideButton.addEventListener('click', () => {
   rideButton.textContent = riding ? 'END RIDE' : 'START RIDE';
   if (riding && navigator.geolocation) navigator.geolocation.watchPosition(locationUpdate, () => alert('Please allow location to show speed.'), { enableHighAccuracy: true, maximumAge: 1000 });
   if (riding && navigator.wakeLock) navigator.wakeLock.request('screen').catch(() => {});
-});
-
-navigation.addEventListener('click', () => {
-  window.open('https://maps.apple.com/?q=Directions', '_blank');
 });
