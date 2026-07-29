@@ -254,3 +254,12 @@ if (destinationForm) destinationForm.addEventListener('submit', event => {
   destination.blur();
   getDirections(place);
 });
+
+
+// Start automatically because the dashboard does not show a Start Ride button.
+if (!riding && navigator.geolocation) {
+  riding = true;
+  lastSpeedSample = undefined;
+  navigator.geolocation.watchPosition(locationUpdate, () => alert('Please allow location to show speed.'), { enableHighAccuracy: true, maximumAge: 1000 });
+  if (navigator.wakeLock) navigator.wakeLock.request('screen').catch(() => {});
+}
