@@ -1,4 +1,4 @@
-:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Arial Rounded MT Bold", sans-serif; }
+:root { color-scheme: dark; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
 * { box-sizing: border-box; }
 body { margin: 0; background: #000; color: #fff; }
 .app { min-height: 100dvh; padding: max(18px, env(safe-area-inset-top)) 22px max(18px, env(safe-area-inset-bottom)); display: grid; grid-template-rows: auto 1fr auto auto auto; gap: 12px; }
