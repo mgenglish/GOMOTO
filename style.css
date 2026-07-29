@@ -71,7 +71,7 @@ header { display: grid; order: 1; grid-template-columns: 1fr 1fr 1fr; align-item
 #clock { color: #fff; letter-spacing: .06em; font-weight: 600; }
 .battery { font-size: clamp(20px, 3.2vw, 35px); }
 body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
-.brand { order: 2; position: relative; display: inline-block; font-family: Bahnschrift, "Segoe UI", Arial, sans-serif; font-size: clamp(26px, 4.1vw, 44px); font-weight: 600; font-style: normal; letter-spacing: .30em; padding-left: .30em; color: #fff; line-height: 1; transform: none; text-shadow: 0 0 10px rgba(150,247,255,.76), 0 0 20px rgba(53,190,255,.32); }
+.brand { order: 2; position: relative; display: inline-block; font-family: Impact, "Arial Black", "Arial Narrow", sans-serif; font-size: clamp(28px, 4.4vw, 48px); font-weight: 900; font-style: italic; letter-spacing: .22em; padding-left: .22em; color: #fff; line-height: .92; transform: skewX(-9deg); text-shadow: 2px 0 0 #91f6ff, 0 0 12px rgba(150,247,255,.88), 0 0 26px rgba(53,190,255,.46); }
 .brand::before, .brand::after { content: ""; position: absolute; top: 50%; width: 31%; height: 2px; background: var(--ice); box-shadow: 0 0 12px rgba(112,239,255,.75); }
 .brand::before { right: calc(50% + 185px); clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%); }
 .brand::after { left: calc(50% + 185px); clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%, 0 50%); }
@@ -98,3 +98,12 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 .music-icon circle { fill: currentColor; }
 .quick-button:active { background: var(--ice); color: #02101a; }
 @media (orientation: portrait) { .app { padding-left: 18px; padding-right: 18px; } .brand::before, .brand::after { width: 17%; } .brand::before { right: calc(50% + 102px); } .brand::after { left: calc(50% + 102px); } .dashboard { min-height: 64vh; } }
+
+/* Reference-style dashboard: clean black core, cyan frame, floating controls */
+body { background: #000; }
+body::before { opacity: .34; background-size: 42px 42px; background-image: linear-gradient(rgba(0,196,226,.20) 1px, transparent 1px), linear-gradient(90deg, rgba(0,196,226,.20) 1px, transparent 1px); mask-image: linear-gradient(to right, black 0%, rgba(0,0,0,.75) 24%, transparent 42%, transparent 58%, rgba(0,0,0,.75) 76%, black 100%); }
+.brand { font-family: "Arial Black", Impact, sans-serif; font-size: clamp(29px, 4.3vw, 46px); font-weight: 900; font-style: normal; letter-spacing: .20em; padding-left: .20em; color: #fff; line-height: 1; transform: none; text-shadow: 0 0 8px rgba(255,255,255,.35), 0 0 18px rgba(112,239,255,.36); }
+.brand::before, .brand::after { height: 2px; box-shadow: 0 0 10px rgba(112,239,255,.7); }
+.dashboard { min-height: min(62vh, 570px); border-color: #b9fbff; background: radial-gradient(ellipse at 50% 48%, rgba(12,30,39,.22), transparent 43%), #010304; box-shadow: 0 0 32px rgba(80,240,255,.32), inset 0 0 70px rgba(0,0,0,.98); }
+#speed { font-family: Impact, "Arial Black", sans-serif; font-weight: 900; letter-spacing: -.07em; text-shadow: 0 0 7px rgba(255,255,255,.4), 0 0 24px rgba(77,226,255,.24); }
+.signal { color: #b9fbff; text-shadow: 0 0 28px rgba(112,239,255,.9); }
