@@ -22,9 +22,14 @@
     </section>
 
     <section class="music" id="music">MUSIC WILL GO HERE LATER</section>
+    <form class="destination-form" id="destination-form">
+      <label class="sr-only" for="destination">Where do you want to go?</label>
+      <input id="destination" type="text" autocomplete="off" placeholder="SAY OR TYPE WHERE TO" enterkeyhint="go">
+      <button type="submit">GO</button>
+    </form>
     <section class="turn-banner" aria-label="Navigation instruction">
-      <span class="turn-arrow" aria-hidden="true">↑</span>
-      <div><strong>MAP FOLLOWS YOU</strong><small>TURN DIRECTIONS COME NEXT</small></div>
+      <span id="turn-arrow" class="turn-arrow" aria-hidden="true">↑</span>
+      <div><strong id="turn-title">MAP FOLLOWS YOU</strong><small id="turn-detail">TURN DIRECTIONS COME NEXT</small></div>
     </section>
     <section class="map-panel" aria-label="Map">
       <div class="map-heading"><span>MAP</span><span id="map-status">START RIDE TO LOCATE</span></div>
@@ -34,6 +39,6 @@
     <button id="ride-button">START RIDE</button>
     <button id="settings" aria-label="Settings">⚙</button>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=repair1"></script>
 </body>
 </html>
