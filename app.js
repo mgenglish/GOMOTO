@@ -1,5 +1,9 @@
 let mapboxToken = localStorage.getItem('gomofo-mapbox-token') || '';
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+
 const speed = document.querySelector('#speed');
 const clock = document.querySelector('#clock');
 const battery = document.querySelector('#battery');
