@@ -1,3 +1,9 @@
+Exit code: 0
+Wall time: 0.5 seconds
+Output:
+// Paste your restricted public Mapbox token between the quotes below.
+const MAPBOX_TOKEN = 'PASTE_YOUR_MAPBOX_TOKEN_HERE';
+
 const speed = document.querySelector('#speed');
 const clock = document.querySelector('#clock');
 const battery = document.querySelector('#battery');
@@ -10,11 +16,15 @@ const destination = document.querySelector('#destination');
 const turnArrow = document.querySelector('#turn-arrow');
 const turnTitle = document.querySelector('#turn-title');
 const turnDetail = document.querySelector('#turn-detail');
+
 let riding = false;
 let tripMiles = 0;
 let lastPosition;
 let weatherLoaded = false;
 let lastMapPoint;
+let currentPoint;
+let routeSteps = [];
+let activeStep = 0;
 
 function updateClock() {
   clock.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -23,8 +33,9 @@ updateClock();
 setInterval(updateClock, 1000);
 
 if (navigator.getBattery) navigator.getBattery().then(b => {
-  const update = () => battery.textContent = `▱ ${Math.round(b.level * 100)}%`;
-  update(); b.addEventListener('levelchange', update);
+  const update = () => battery.textContent = `â–± ${Math.round(b.level * 100)}%`;
+  update();
+  b.addEventListener('levelchange', update);
 });
 
 function kilometresBetween(a, b) {
@@ -38,6 +49,7 @@ function kilometresBetween(a, b) {
 function locationUpdate(position) {
   if (!riding) return;
   const point = position.coords;
+  currentPoint = { latitude: point.latitude, longitude: point.longitude };
   const mph = Math.max(0, (point.speed || 0) * 2.23694);
   speed.textContent = Math.round(mph);
   if (lastPosition && point.accuracy < 50) tripMiles += kilometresBetween(lastPosition, point) * .621371;
@@ -45,6 +57,7 @@ function locationUpdate(position) {
   odometer.textContent = `TRIP ${tripMiles.toFixed(1)} MI`;
   if (!weatherLoaded) loadWeather(point.latitude, point.longitude);
   updateMap(point.latitude, point.longitude);
+  advanceRouteIfNeeded();
 }
 
 function updateMap(latitude, longitude) {
@@ -58,12 +71,12 @@ function updateMap(latitude, longitude) {
 }
 
 function weatherIcon(code) {
-  if (code === 0) return '☀';
-  if (code <= 3) return '☁';
-  if (code <= 48) return '☷';
-  if (code <= 67) return '☂';
-  if (code <= 77) return '❄';
-  return 'ϟ';
+  if (code === 0) return 'â˜€';
+  if (code <= 3) return 'â˜';
+  if (code <= 48) return 'â˜·';
+  if (code <= 67) return 'â˜‚';
+  if (code <= 77) return 'â„';
+  return 'ÏŸ';
 }
 
 async function loadWeather(latitude, longitude) {
@@ -73,10 +86,88 @@ async function loadWeather(latitude, longitude) {
     const response = await fetch(url);
     const data = await response.json();
     const now = data.current;
-    document.querySelector('#weather').textContent = `${weatherIcon(now.weather_code)} ${Math.round(now.temperature_2m)}°`;
+    document.querySelector('#weather').textContent = `${weatherIcon(now.weather_code)} ${Math.round(now.temperature_2m)}Â°`;
   } catch {
     weatherLoaded = false;
     document.querySelector('#weather').textContent = 'WEATHER --';
+  }
+}
+
+function turnArrowFor(step) {
+  const modifier = step.maneuver.modifier || '';
+  if (modifier.includes('left')) return 'â†°';
+  if (modifier.includes('right')) return 'â†±';
+  if (modifier === 'uturn') return 'â†©';
+  return 'â†‘';
+}
+
+function distanceLabel(meters) {
+  const feet = Math.round(meters * 3.28084);
+  if (feet < 1000) return `${feet} FT`;
+  return `${(feet / 5280).toFixed(1)} MI`;
+}
+
+function showActiveStep() {
+  const step = routeSteps[activeStep];
+  if (!step) {
+    turnArrow.textContent = 'âœ“';
+    turnTitle.textContent = 'YOU ARRIVED';
+    turnDetail.textContent = 'DESTINATION REACHED';
+    return;
+  }
+  turnArrow.textContent = turnArrowFor(step);
+  turnTitle.textContent = (step.maneuver.instruction || 'KEEP GOING').toUpperCase();
+  turnDetail.textContent = `${distanceLabel(step.distance)} â€¢ ${activeStep + 1} OF ${routeSteps.length}`;
+}
+
+function advanceRouteIfNeeded() {
+  const step = routeSteps[activeStep];
+  if (!step || !currentPoint || !step.maneuver.location) return;
+  const [longitude, latitude] = step.maneuver.location;
+  if (kilometresBetween(currentPoint, { latitude, longitude }) < 0.05) {
+    activeStep += 1;
+    showActiveStep();
+  }
+}
+
+async function getDirections(place) {
+  if (MAPBOX_TOKEN === 'PASTE_YOUR_MAPBOX_TOKEN_HERE') {
+    turnTitle.textContent = 'ADD MAPBOX TOKEN';
+    turnDetail.textContent = 'TOKEN NEEDS TO BE PASTED INTO APP.JS';
+    return;
+  }
+  if (!currentPoint) {
+    turnTitle.textContent = 'START RIDE FIRST';
+    turnDetail.textContent = 'WE NEED YOUR LOCATION';
+    return;
+  }
+
+  turnTitle.textContent = 'FINDING ROUTE';
+  turnDetail.textContent = 'ONE MOMENT';
+  try {
+    const search = new URL('https://api.mapbox.com/search/geocode/v6/forward');
+    search.searchParams.set('q', place);
+    search.searchParams.set('proximity', `${currentPoint.longitude},${currentPoint.latitude}`);
+    search.searchParams.set('limit', '1');
+    search.searchParams.set('access_token', MAPBOX_TOKEN);
+    const searchData = await (await fetch(search)).json();
+    const feature = searchData.features && searchData.features[0];
+    if (!feature) throw new Error('Place not found');
+    const [destinationLongitude, destinationLatitude] = feature.geometry.coordinates;
+    const origin = `${currentPoint.longitude},${currentPoint.latitude}`;
+    const destinationPoint = `${destinationLongitude},${destinationLatitude}`;
+    const routeUrl = `https://api.mapbox.com/directions/v5/mapbox/cycling/${origin};${destinationPoint}?steps=true&overview=false&access_token=${encodeURIComponent(MAPBOX_TOKEN)}`;
+    const routeData = await (await fetch(routeUrl)).json();
+    const steps = routeData.routes && routeData.routes[0] && routeData.routes[0].legs[0].steps;
+    if (!steps || steps.length < 1) throw new Error('Route not found');
+    routeSteps = steps;
+    activeStep = steps.length > 1 ? 1 : 0;
+    mapStatus.textContent = `ROUTE TO ${feature.properties.name.toUpperCase()}`;
+    showActiveStep();
+  } catch {
+    turnArrow.textContent = '!';
+    turnTitle.textContent = 'ROUTE NOT FOUND';
+    turnDetail.textContent = 'TRY A MORE SPECIFIC PLACE';
   }
 }
 
@@ -91,8 +182,8 @@ destinationForm.addEventListener('submit', event => {
   event.preventDefault();
   const place = destination.value.trim();
   if (!place) return;
-  turnArrow.textContent = '↑';
-  turnTitle.textContent = place.toUpperCase();
-  turnDetail.textContent = 'DESTINATION SAVED — DIRECTIONS NEXT';
   destination.blur();
+  getDirections(place);
 });
+
+
