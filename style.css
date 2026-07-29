@@ -81,7 +81,11 @@ body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
 .signal { color: #b9fbff; font-size: clamp(56px, 9vw, 112px); text-shadow: 0 0 26px rgba(112,239,255,.85); }
 .quick-actions { position: fixed; z-index: 10; inset: 0; pointer-events: none; }
 .quick-button { position: fixed; bottom: max(24px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: clamp(78px, 10vw, 104px); height: clamp(78px, 10vw, 104px); border: 2px solid var(--ice); border-radius: 50%; background: rgba(4,14,23,.94); color: var(--ice); text-decoration: none; font-size: clamp(42px, 5vw, 58px); line-height: 1; box-shadow: 0 0 26px rgba(112,239,255,.42), inset 0 0 18px rgba(112,239,255,.16); pointer-events: auto; }
-.compass-button { left: max(24px, env(safe-area-inset-left)); font-size: clamp(38px, 4.6vw, 54px); }
+.compass-button { left: max(24px, env(safe-area-inset-left)); position: fixed; font-size: 0; }
+.compass-mark { position: relative; display: block; width: 44%; height: 44%; border: 2px solid currentColor; border-radius: 50%; }
+.compass-mark::before, .compass-mark::after { content: ""; position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: translate(-50%, -50%) rotate(38deg); }
+.compass-mark::before { border-left: 9px solid transparent; border-right: 9px solid transparent; border-bottom: 30px solid currentColor; transform: translate(-50%, -100%) rotate(38deg); }
+.compass-mark::after { border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 30px solid rgba(112,239,255,.28); transform: translate(-50%, 0) rotate(38deg); }
 .music-button { right: max(24px, env(safe-area-inset-right)); }
 .quick-button:active { background: var(--ice); color: #02101a; }
 @media (orientation: portrait) { .app { padding-left: 18px; padding-right: 18px; } .brand::before, .brand::after { width: 17%; } .brand::before { right: calc(50% + 102px); } .brand::after { left: calc(50% + 102px); } .dashboard { min-height: 64vh; } }
