@@ -37,12 +37,12 @@ body { background: radial-gradient(circle at 50% -20%, #183c65 0, #07111e 38%, #
 body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18; background-image: linear-gradient(rgba(140,236,255,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(140,236,255,.18) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(to bottom, black, transparent 78%); }
 .app { position: relative; max-width: 1100px; margin: auto; }
 header { color: var(--ice); text-shadow: 0 0 14px rgba(140,236,255,.45); letter-spacing: .06em; font-weight: 500; }
-.dashboard { border: 1px solid rgba(140,236,255,.28); border-radius: 28px; background: linear-gradient(145deg, rgba(31,55,86,.5), rgba(5,11,21,.7)); box-shadow: inset 0 0 32px rgba(89,180,255,.08), 0 18px 50px rgba(0,0,0,.28); }
+.dashboard { border: 1px solid rgba(140,236,255,.48); border-radius: 4px; background: linear-gradient(145deg, rgba(31,55,86,.5), rgba(5,11,21,.7)); box-shadow: inset 0 0 32px rgba(89,180,255,.08), 0 18px 50px rgba(0,0,0,.28); clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px)); }
 #speed { color: #f8fdff; text-shadow: 0 0 8px rgba(140,236,255,.6), 0 0 28px rgba(57,169,255,.35); font-weight: 500; letter-spacing: -.06em; }
 .speed small, .speed p { color: var(--ice); letter-spacing: .14em; font-weight: 500; }
 .music, .destination-form input, .destination-form button, .turn-banner strong, .map-heading, button { font-weight: 500; letter-spacing: .08em; }
 .signal { color: var(--ice); opacity: .45; text-shadow: 0 0 25px rgba(140,236,255,.6); }
-.music, .destination-form input, .turn-banner, .map-panel { border-color: rgba(140,236,255,.45); background: var(--panel); box-shadow: 0 10px 28px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.08); }
+.music, .destination-form input, .turn-banner, .map-panel { border-color: rgba(140,236,255,.55); border-radius: 3px; background: var(--panel); box-shadow: 0 10px 28px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.08); }
 .music { color: var(--ice); background: linear-gradient(100deg, #133c5f, #10223b); letter-spacing: .1em; }
 .destination-form button, #ride-button { border-color: #8cecff; background: linear-gradient(135deg, #8cecff, #49a8ff); color: #03111e; box-shadow: 0 0 22px rgba(83,188,255,.38); }
 .turn-banner { justify-content: flex-start; }
@@ -50,3 +50,8 @@ header { color: var(--ice); text-shadow: 0 0 14px rgba(140,236,255,.45); letter-
 .turn-banner strong { color: #f6fcff; letter-spacing: .06em; }
 .map-heading { background: linear-gradient(90deg, #102e4a, #09131f); color: var(--ice); }
 #settings { border-color: rgba(140,236,255,.7); color: var(--ice); box-shadow: 0 0 18px rgba(140,236,255,.26); }
+
+/* Sharper controls */
+button, .destination-form button { border-radius: 3px; }
+.music { clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
+.turn-banner { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px)); }
