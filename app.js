@@ -5,6 +5,11 @@ const rideButton = document.querySelector('#ride-button');
 const odometer = document.querySelector('#odometer');
 const map = document.querySelector('#map');
 const mapStatus = document.querySelector('#map-status');
+const destinationForm = document.querySelector('#destination-form');
+const destination = document.querySelector('#destination');
+const turnArrow = document.querySelector('#turn-arrow');
+const turnTitle = document.querySelector('#turn-title');
+const turnDetail = document.querySelector('#turn-detail');
 let riding = false;
 let tripMiles = 0;
 let lastPosition;
@@ -80,4 +85,14 @@ rideButton.addEventListener('click', () => {
   rideButton.textContent = riding ? 'END RIDE' : 'START RIDE';
   if (riding && navigator.geolocation) navigator.geolocation.watchPosition(locationUpdate, () => alert('Please allow location to show speed.'), { enableHighAccuracy: true, maximumAge: 1000 });
   if (riding && navigator.wakeLock) navigator.wakeLock.request('screen').catch(() => {});
+});
+
+destinationForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const place = destination.value.trim();
+  if (!place) return;
+  turnArrow.textContent = '↑';
+  turnTitle.textContent = place.toUpperCase();
+  turnDetail.textContent = 'DESTINATION SAVED — DIRECTIONS NEXT';
+  destination.blur();
 });
