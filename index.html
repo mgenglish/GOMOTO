@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <title>GOMOFO</title>
-<link rel="stylesheet" href="style.css?v=future9">
+<link rel="stylesheet" href="style.css?v=future10">
 </head>
 <body>
   <main class="app" aria-live="polite">
@@ -17,9 +17,9 @@
     </header>
 
     <section class="dashboard">
-      <div id="left-signal" class="signal">◀</div>
+      <div id="left-signal" class="signal" role="button" tabindex="0" aria-label="Turn left signal" aria-pressed="false">◀</div>
       <div class="speed"><span id="speed">0</span></div>
-      <div id="right-signal" class="signal">▶</div>
+      <div id="right-signal" class="signal" role="button" tabindex="0" aria-label="Turn right signal" aria-pressed="false">▶</div>
       <p id="odometer">0.0 MI</p>
     </section>
 
@@ -27,6 +27,28 @@
       <a class="quick-button compass-button" href="https://maps.apple.com/" target="_blank" rel="noopener" aria-label="Open navigation"><svg class="compass-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><path class="needle-north" d="M65 29 54 54 29 65 46 46Z"/><path class="needle-south" d="M35 71 46 46 71 35 54 54Z"/></svg></a>
       <a class="quick-button music-button" href="https://music.apple.com/" target="_blank" rel="noopener" aria-label="Open Apple Music"><svg class="music-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M62 21v46L39 74V37Z"/><circle cx="34" cy="74" r="10"/><circle cx="57" cy="67" r="10"/></svg></a>
     </nav>
+
+    <button id="scooter-controls" class="scooter-controls" type="button" aria-haspopup="dialog" aria-controls="scooter-panel">GT4</button>
+    <section id="scooter-panel" class="scooter-panel" role="dialog" aria-modal="true" aria-labelledby="scooter-title" hidden>
+      <div class="scooter-card">
+        <div class="scooter-card-header">
+          <div><span class="eyebrow">SCOOTER CONTROLS</span><h2 id="scooter-title">iSINWHEEL GT4</h2></div>
+          <button id="close-scooter-controls" class="close-controls" type="button" aria-label="Close scooter controls">×</button>
+        </div>
+        <p class="preview-note">DASHBOARD PREVIEW — NOT CONNECTED TO SCOOTER</p>
+        <div class="control-grid">
+          <button class="scooter-control mode-control is-selected" type="button" data-group="mode" data-value="ECO">ECO</button>
+          <button class="scooter-control mode-control" type="button" data-group="mode" data-value="SPORT">SPORT</button>
+          <button class="scooter-control mode-control" type="button" data-group="mode" data-value="RACE">RACE</button>
+          <button class="scooter-control drive-control is-selected" type="button" data-group="drive" data-value="1WD">1WD</button>
+          <button class="scooter-control drive-control" type="button" data-group="drive" data-value="2WD">2WD</button>
+          <button class="scooter-control toggle-control" type="button" data-toggle="lights" aria-pressed="false">LIGHTS <span>OFF</span></button>
+          <button class="scooter-control toggle-control" type="button" data-toggle="lock" aria-pressed="false">LOCK <span>OFF</span></button>
+        </div>
+        <p id="scooter-status" class="scooter-status">ECO · 1WD · LIGHTS OFF · UNLOCKED</p>
+        <p class="scooter-warning">For now, use the official isinwheel Club app for real scooter controls.</p>
+      </div>
+    </section>
 
     <a class="music" id="music" href="https://music.apple.com/" target="_blank" rel="noopener">OPEN APPLE MUSIC</a>
     <form class="destination-form" id="destination-form">
