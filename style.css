@@ -71,7 +71,7 @@ header { display: grid; order: 1; grid-template-columns: 1fr 1fr 1fr; align-item
 #clock { color: #fff; letter-spacing: .06em; font-weight: 600; }
 .battery { font-size: clamp(20px, 3.2vw, 35px); }
 body::before { opacity: .42; background-size: 42px 42px; mask-image: none; }
-.brand { order: 2; position: relative; display: inline-block; font-family: Impact, "Arial Black", "Arial Narrow", sans-serif; font-size: clamp(28px, 4.4vw, 48px); font-weight: 900; font-style: italic; letter-spacing: .22em; padding-left: .22em; color: #fff; line-height: .92; transform: skewX(-9deg); text-shadow: 2px 0 0 #91f6ff, 0 0 12px rgba(150,247,255,.88), 0 0 26px rgba(53,190,255,.46); }
+.brand { order: 2; position: relative; display: inline-block; font-family: Bahnschrift, "Segoe UI", Arial, sans-serif; font-size: clamp(26px, 4.1vw, 44px); font-weight: 600; font-style: normal; letter-spacing: .30em; padding-left: .30em; color: #fff; line-height: 1; transform: none; text-shadow: 0 0 10px rgba(150,247,255,.76), 0 0 20px rgba(53,190,255,.32); }
 .brand::before, .brand::after { content: ""; position: absolute; top: 50%; width: 31%; height: 2px; background: var(--ice); box-shadow: 0 0 12px rgba(112,239,255,.75); }
 .brand::before { right: calc(50% + 185px); clip-path: polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%); }
 .brand::after { left: calc(50% + 185px); clip-path: polygon(0 0, 100% 0, 100% 100%, 12% 100%, 0 50%); }
